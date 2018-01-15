@@ -1,0 +1,8 @@
+# dependencies
+/.vscode/
+/lib/
+/node_modules/
+*.log
+npm-debug.log*
+/data/
+/public/js/

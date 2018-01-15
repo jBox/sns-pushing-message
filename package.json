@@ -1,0 +1,46 @@
+{
+  "name": "sns-pushing-message",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "nodemon -w lib ./bin/www",
+    "clear": "del-cli lib/**",
+    "build": "npm run clear && babel src --out-dir lib && webpack -p",
+    "dev": "npm run clear && babel src --out-dir lib --watch",
+    "dev:web": "webpack -w --profile --colors --progress"
+  },
+  "dependencies": {
+    "aws-sdk": "^2.181.0",
+    "body-parser": "~1.17.1",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.6.3",
+    "express": "~4.15.2",
+    "fs-extra": "^5.0.0",
+    "morgan": "~1.8.1",
+    "prop-types": "^15.6.0",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "react-redux": "^5.0.6",
+    "redux": "^3.7.2",
+    "redux-thunk": "^2.2.0",
+    "serve-favicon": "~2.4.2"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-2": "^6.24.1",
+    "del-cli": "^1.1.0",
+    "nodemon": "^1.14.11",
+    "webpack": "^3.10.0"
+  },
+  "babel": {
+    "presets": [
+      "env",
+      "react",
+      "stage-2"
+    ]
+  }
+}

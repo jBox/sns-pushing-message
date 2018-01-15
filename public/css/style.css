@@ -1,0 +1,114 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    padding: 0px;
+    margin: 0px;
+    font: "Lucida Grande", Helvetica, Arial, sans-serif;
+    font-size: 12px;
+}
+
+input {
+    font-size: 12px;
+}
+
+a {
+    color: #00B7FF;
+}
+
+.main {
+    width: 1024px;
+    margin: auto;
+}
+
+.subscribe .item-box {
+    padding: 0px;
+    margin: 0px;
+}
+
+.subscribe .item-box li {
+    padding: 0px;
+    margin: 0px;
+    list-style: none;
+    display: inline-block;
+}
+
+.subscribe .item-box li.remove,
+.subscribe .item-box li.icon {
+    width: 30px;
+    font-size: 18px;
+    line-height: 24px;
+    vertical-align: bottom;
+}
+
+.subscribe .item-box li.check {
+    color: green;
+}
+
+.subscribe .item-box li.input {
+    width: 600px;
+    position: relative;
+    line-height: 20px;
+}
+
+.subscribe .item-box li.text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    line-height: initial;
+}
+
+.subscribe .item-box:hover li.text {
+    color: green;
+}
+
+.subscribe .item-box li.input input {
+    width: 600px;
+    padding: 2px;
+    display: block;
+    height: 24px;
+    outline: none;
+}
+
+.subscribe .item-box li.input input:active {
+    outline: none;
+}
+
+.subscribe .item-box li.input button {
+    position: absolute;
+    background-color: transparent;
+    top: 2px;
+    right: 0;
+    border: none;
+    outline: none;
+    font-size: 14px;
+    color: gray;
+}
+
+.subscribe .item-box li.input button:active,
+.subscribe .item-box li.input button:hover {
+    outline: none;
+}
+
+.subscribe .item-box li.remove {
+    display: none;
+    text-align: center;
+}
+
+.subscribe .item-box:hover li.remove {
+    display: inline-block;
+}
+
+.subscribe .item-box li.remove i {
+    color: gray;
+    cursor: pointer;
+}
+
+.subscribe .item-box li.remove i:hover {
+    color: red;
+}
+
+.subscribe .subscriptions {
+    padding: 10px 0;
+}
