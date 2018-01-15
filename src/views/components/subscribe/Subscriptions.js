@@ -34,6 +34,7 @@ export default class Subscriptions extends Component {
 
     render() {
         const { data } = this.props;
+
         return (
             <div className="subscriptions">
                 <h3>Subscriptions</h3>

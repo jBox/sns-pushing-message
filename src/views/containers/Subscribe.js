@@ -27,7 +27,7 @@ class Subscribe extends Component {
         const { fetchSubscriptions } = this.props;
         if (fetchSubscriptions) {
             fetchSubscriptions();
-            this.timeout = setTimeout(this.querySubscriptions, 3000);
+            this.timeout = setTimeout(this.querySubscriptions, 1500);
         }
     }
 

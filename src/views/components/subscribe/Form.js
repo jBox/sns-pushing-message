@@ -36,7 +36,7 @@ export default class Form extends Component {
                         <i className="fa fa-plus-circle" aria-hidden="true"></i>
                     </li>
                     <li className="input">
-                        <input onClick={this.handleArnChange} type="text" value={arn}
+                        <input onChange={this.handleArnChange} type="text" value={arn}
                             placeholder="Subscribe a new topic" />
                         <button className="enter" type="submit">
                             <i className="fa fa-keyboard-o" aria-hidden="true"></i>
