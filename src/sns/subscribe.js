@@ -33,7 +33,7 @@ export const subscribe = (topic) => {
                 console.log(data);   // successful response
                 return addSubscription({
                     Endpoint: AWS_SNS_HTTP_ENDPOINT,
-                    TopicArn,
+                    TopicArn: topic,
                     SubscriptionArn: data.SubscriptionArn
                 }).then((data) => {
                     resolve(data);

@@ -18,7 +18,7 @@ const initSubscriptions = () => {
 
 initSubscriptions();
 
-const getSubscriptionkey = (sub) => {
+const getSubscriptionkey = (sub = {}) => {
     return `${sub.Endpoint}${sub.TopicArn}`;
 }
 
@@ -35,13 +35,15 @@ const updateSubscriptions = (subscriptions) => {
 };
 
 export const addSubscription = (subscription) => {
+    const sKey = getSubscriptionkey(subscription);
+    const exists = universe.__subscriptions.find((x) => getSubscriptionkey(x) === sKey);
     const subscriptions = universe.__subscriptions.reduce((items, sub) => {
-        if (getSubscriptionkey(sub) === getSubscriptionkey(subscription)) {
+        if (getSubscriptionkey(sub) === sKey) {
             return items.concat(subscription);
         }
 
         return items.concat(sub);
-    }, []);
+    }, exists ? [] : [subscription]);
     return updateSubscriptions(subscriptions);
 };
 
