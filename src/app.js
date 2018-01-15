@@ -13,8 +13,9 @@ const app = express();
 // uncomment after placing your favicon in /public
 app.use(favicon(Path.join(__dirname, "../public", "favicon.ico")));
 app.use(logger("dev"));
-app.use(bodyParser.json());
+app.use(bodyParser.json({ type: "application/*+json" }))
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.text({ type: "text/*" }));
 app.use(cookieParser());
 app.use("/public", express.static(Path.join(__dirname, "../public")));
 

@@ -11,9 +11,10 @@ router.post("/", function (req, res) {
     return res.send({ status: 500, message: "Not allow." });
   }
 
+  const jsonBody = JSON.parse(req.body);
   switch (snsMessageType) {
     case "SubscriptionConfirmation":
-      return confirmSubscription(req.body).then((subscriptionArn) => {
+      return confirmSubscription(jsonBody).then((subscriptionArn) => {
         res.send({ subscriptionArn });
       }).catch(error => {
         res.status(500);
