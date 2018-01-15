@@ -47,9 +47,9 @@ export const addSubscription = (subscription) => {
     return updateSubscriptions(subscriptions);
 };
 
-export const removeSubscription = (subscription) => {
+export const removeSubscription = (subscriptionArn) => {
     const subscriptions = universe.__subscriptions.reduce((items, sub) => {
-        if (getSubscriptionkey(sub) !== getSubscriptionkey(subscription)) {
+        if (sub.SubscriptionArn !== subscriptionArn) {
             return items.concat(sub);
         }
 

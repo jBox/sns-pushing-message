@@ -1,5 +1,5 @@
 import express from "express";
-import { subscribe, confirmSubscription } from "../sns/subscribe";
+import { subscribe, unsubscribe, confirmSubscription } from "../sns/subscribe";
 import { getSubscriptions } from "../sns/subscriptions";
 
 const router = express.Router();
@@ -27,6 +27,16 @@ router.post("/", function (req, res) {
 router.post("/subscribe/:topic", (req, res) => {
   const { topic } = req.params;
   subscribe(topic).then((data) => {
+    res.send(data);
+  }).catch(error => {
+    res.status(500);
+    res.send(error);
+  });
+});
+/* POST sns listing. */
+router.post("/unsubscribe/:arn", (req, res) => {
+  const { arn } = req.params;
+  unsubscribe(arn).then((data) => {
     res.send(data);
   }).catch(error => {
     res.status(500);

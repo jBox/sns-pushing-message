@@ -5,7 +5,7 @@ import {
     AWS_SNS_REGION,
     AWS_SNS_HTTP_ENDPOINT
 } from "../config";
-import { addSubscription } from "./subscriptions";
+import { addSubscription, removeSubscription } from "./subscriptions";
 
 const SNS = () => {
     AWS.config.update({
@@ -75,7 +75,9 @@ export const unsubscribe = (subscriptionArn) => {
                 reject(err);
             } else {
                 console.log(data);   // successful response
-                resolve(data);
+                return removeSubscription(subscriptionArn).then((subscriptions) => {
+                    resolve(subscriptions);
+                });
             }
         });
     });

@@ -13,10 +13,6 @@ class Subscribe extends Component {
         unsubscribe: PropTypes.func
     }
 
-    state = {
-        subscribeOpened: false
-    }
-
     timeout = 0;
 
     componentDidMount() {
@@ -35,26 +31,17 @@ class Subscribe extends Component {
         }
     }
 
-    handleOpenSubscribe = (event) => {
-        event.preventDefault();
-        event.stopPropagation();
-        this.setState({ subscribeOpened: true });
-    }
-
-    handleCloseSubscribe = (event) => {
-        event.preventDefault();
-        event.stopPropagation();
-        this.setState({ subscribeOpened: false });
-    }
-
-    handleSubscribe = (form) => {
-        this.setState({ subscribeOpened: false });
+    handleSubscribe = (arn) => {
+        const { subscribe } = this.props;
+        if (subscribe) {
+            subscribe(arn);
+        }
     }
 
     handleUnsubscribe = (sub) => {
         const { unsubscribe } = this.props;
         if (unsubscribe) {
-            unsubscribe(sub);
+            unsubscribe(sub.SubscriptionArn);
         }
     }
 

@@ -38,12 +38,13 @@ export const subscribe = (topic) => (dispatch) => {
     });
 }
 
-export const unsubscribe = (sub) => (dispatch) => {
-    return fetch(`/sns/unsubscribe/${sub}`, { method: "POST" }).then((res) => {
+export const unsubscribe = (subscriptionArn) => (dispatch) => {
+    return fetch(`/sns/unsubscribe/${subscriptionArn}`, { method: "POST" }).then((res) => {
         if (res.status >= 200 && res.status < 300) {
-            return dispatch({
-                type: UNSUBSCRIBE,
-                sub
+            return res.json().then((data) => {
+                return dispatch({
+                    type: UNSUBSCRIBE, data
+                });
             });
         }
     });
