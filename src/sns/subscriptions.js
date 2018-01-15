@@ -18,6 +18,10 @@ const initSubscriptions = () => {
 
 initSubscriptions();
 
+const getSubscriptionkey = (sub) => {
+    return `${sub.Endpoint}${sub.TopicArn}`;
+}
+
 const updateSubscriptions = (subscriptions) => {
     return fs.writeJson(SubscriptionsPath, subscriptions)
         .then(() => {
@@ -31,13 +35,19 @@ const updateSubscriptions = (subscriptions) => {
 };
 
 export const addSubscription = (subscription) => {
-    const subscriptions = [...universe.__subscriptions, subscription];
+    const subscriptions = universe.__subscriptions.reduce((items, sub) => {
+        if (getSubscriptionkey(sub) === getSubscriptionkey(subscription)) {
+            return items.concat(subscription);
+        }
+
+        return items.concat(sub);
+    }, []);
     return updateSubscriptions(subscriptions);
 };
 
 export const removeSubscription = (subscription) => {
     const subscriptions = universe.__subscriptions.reduce((items, sub) => {
-        if (sub !== subscription) {
+        if (getSubscriptionkey(sub) !== getSubscriptionkey(subscription)) {
             return items.concat(sub);
         }
 

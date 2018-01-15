@@ -31,7 +31,13 @@ export const subscribe = (topic) => {
                 reject(err);
             } else {
                 console.log(data);   // successful response
-                resolve(data);
+                return addSubscription({
+                    Endpoint: AWS_SNS_HTTP_ENDPOINT,
+                    TopicArn,
+                    SubscriptionArn: data.SubscriptionArn
+                }).then((data) => {
+                    resolve(data);
+                });
             }
         });
     });
@@ -47,7 +53,11 @@ export const confirmSubscription = ({ Token, TopicArn }) => {
                 reject(err);
             } else {
                 console.log(data);           // successful response
-                addSubscription(data.SubscriptionArn).then((data) => {
+                addSubscription({
+                    Endpoint: AWS_SNS_HTTP_ENDPOINT,
+                    TopicArn,
+                    SubscriptionArn: data.SubscriptionArn
+                }).then((data) => {
                     resolve(data);
                 });
             }
