@@ -21,7 +21,7 @@ export const fetchSubscriptions = () => (dispatch) => {
                 return dispatch({
                     type: GET_SUBSCRIPTIONS, data
                 });
-            })
+            });
         }
     });
 }
@@ -29,9 +29,10 @@ export const fetchSubscriptions = () => (dispatch) => {
 export const subscribe = (topic) => (dispatch) => {
     return fetch(`/sns/subscribe/${topic}`, { method: "POST" }).then((res) => {
         if (res.status >= 200 && res.status < 300) {
-            return dispatch({
-                type: SUBSCRIBE,
-                topic
+            return res.json().then((data) => {
+                return dispatch({
+                    type: SUBSCRIBE, data
+                });
             });
         }
     });

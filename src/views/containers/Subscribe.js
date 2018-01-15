@@ -17,10 +17,21 @@ class Subscribe extends Component {
         subscribeOpened: false
     }
 
+    timeout = 0;
+
     componentDidMount() {
+        this.querySubscriptions();
+    }
+
+    componentWillUnmount() {
+        clearInterval(this.timeout);
+    }
+
+    querySubscriptions = () => {
         const { fetchSubscriptions } = this.props;
         if (fetchSubscriptions) {
             fetchSubscriptions();
+            this.timeout = setTimeout(this.querySubscriptions, 3000);
         }
     }
 

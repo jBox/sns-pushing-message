@@ -35,9 +35,7 @@ export const subscribe = (topic) => {
                     Endpoint: AWS_SNS_HTTP_ENDPOINT,
                     TopicArn: topic,
                     SubscriptionArn: data.SubscriptionArn
-                }).then((data) => {
-                    resolve(data);
-                });
+                }).then((subscriptions) => resolve(subscriptions));
             }
         });
     });
