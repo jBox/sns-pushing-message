@@ -2,9 +2,10 @@ export const SUBSCRIBE = "SUBSCRIBE";
 export const UNSUBSCRIBE = "UNSUBSCRIBE";
 
 export const GET_MESSAGES = "GET_MESSAGES";
+export const GET_SUBSCRIPTIONS = "GET_SUBSCRIPTIONS";
 
 export const fetchMessages = () => (dispatch) => {
-    return fatch(`/sns/messages`, { method: "GET" }).then((res) => {
+    return fetch(`/sns/messages`, { method: "GET" }).then((res) => {
         if (res.status >= 200 && res.status < 300) {
             return dispatch({
                 type: GET_MESSAGES,
@@ -13,8 +14,20 @@ export const fetchMessages = () => (dispatch) => {
     });
 }
 
+export const fetchSubscriptions = () => (dispatch) => {
+    return fetch(`/sns/subscriptions`, { method: "GET" }).then((res) => {
+        if (res.status >= 200 && res.status < 300) {
+            return res.json().then((data) => {
+                return dispatch({
+                    type: GET_SUBSCRIPTIONS, data
+                });
+            })
+        }
+    });
+}
+
 export const subscribe = (topic) => (dispatch) => {
-    return fatch(`/sns/subscribe/${topic}`, { method: "POST" }).then((res) => {
+    return fetch(`/sns/subscribe/${topic}`, { method: "POST" }).then((res) => {
         if (res.status >= 200 && res.status < 300) {
             return dispatch({
                 type: SUBSCRIBE,
@@ -25,7 +38,7 @@ export const subscribe = (topic) => (dispatch) => {
 }
 
 export const unsubscribe = (sub) => (dispatch) => {
-    return fatch(`/sns/unsubscribe/${sub}`, { method: "POST" }).then((res) => {
+    return fetch(`/sns/unsubscribe/${sub}`, { method: "POST" }).then((res) => {
         if (res.status >= 200 && res.status < 300) {
             return dispatch({
                 type: UNSUBSCRIBE,

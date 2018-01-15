@@ -1,24 +1,22 @@
 import { combineReducers } from "redux";
+import {
+    GET_SUBSCRIPTIONS
+} from "./actions";
 
-const subscriptions = (state = [
-    {
-        endpoint: "wallance.zhang@moodys.com",
-        protocol: "email",
-        subscriptionArn: "arn:aws:sns:ap-southeast-1:807141695677:CodingTestResults:99a4410f-ad04-4677-aa16-0c56a8918599",
-        topicArn: "arn:aws:sns:ap-southeast-1:807141695677:CodingTestResults"
-    },
-    {
-        endpoint: "http://18.218.154.49/sns",
-        protocol: "http",
-        subscriptionArn: "arn:aws:sns:ap-southeast-1:807141695677:CodingTestResults:f38dd511-5a4e-4ed6-b63f-cafce5459310",
-        topicArn: "arn:aws:sns:ap-southeast-1:807141695677:CodingTestResults"
+const subscriptions = (state = [], action) => {
+    switch (action.type) {
+        case GET_SUBSCRIPTIONS:
+            return action.data;
+        default:
+            return state;
     }
-], action) => {
-    return state;
 }
 
 const messages = (state = [], action) => {
-    return state;
+    switch (action.type) {
+        default:
+            return state;
+    }
 }
 
 export default combineReducers({

@@ -3,12 +3,12 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import Form from "../components/subscribe/Form";
 import Subscriptions from "../components/subscribe/Subscriptions";
-import { subscribe, unsubscribe, getSubscriptions } from "../redux/actions";
+import { subscribe, unsubscribe, fetchSubscriptions } from "../redux/actions";
 
 class Subscribe extends Component {
     static propTypes = {
         subscriptions: PropTypes.array,
-        getSubscriptions: PropTypes.func,
+        fetchSubscriptions: PropTypes.func,
         subscribe: PropTypes.func,
         unsubscribe: PropTypes.func
     }
@@ -18,9 +18,9 @@ class Subscribe extends Component {
     }
 
     componentDidMount() {
-        const { getSubscriptions } = this.props;
-        if (getSubscriptions) {
-            getSubscriptions();
+        const { fetchSubscriptions } = this.props;
+        if (fetchSubscriptions) {
+            fetchSubscriptions();
         }
     }
 
@@ -65,5 +65,5 @@ const mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps, {
-    subscribe, unsubscribe, getSubscriptions
+    subscribe, unsubscribe, fetchSubscriptions
 })(Subscribe);

@@ -1,14 +1,14 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
-const Subscription = ({ subscriptionArn, onRemove }) => {
+const Subscription = ({ SubscriptionArn, onRemove }) => {
     return (
         <ul className="item-box">
             <li className="icon check">
                 <i className="fa fa-check-circle-o" aria-hidden="true"></i>
             </li>
             <li className="input text">
-                {subscriptionArn}
+                {SubscriptionArn}
             </li>
             <li className="remove">
                 <i className="fa fa-minus-circle" aria-hidden="true" onClick={onRemove}></i>
