@@ -1,18 +1,24 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import classNames from "classnames";
 
-const Subscription = ({ SubscriptionArn, onRemove }) => {
+const Subscription = ({ SubscriptionArn, unsubscribe, error, onRemove }) => {
+    const textClass = classNames("input text", { unsubscribe: unsubscribe === "pending" });
+    const errorMessage = error && unsubscribe === "failure" ? error.message : "";
     return (
         <ul className="item-box">
-            <li className="icon check">
-                <i className="fa fa-check-circle-o" aria-hidden="true"></i>
+            <li className="icon">
+                <i className="fa fa-check-circle-o check" aria-hidden="true"></i>
+                <i className="fa fa-minus-circle remove" aria-hidden="true" onClick={onRemove}></i>
             </li>
-            <li className="input text">
+            <li className={textClass}>
                 {SubscriptionArn}
             </li>
-            <li className="remove">
-                <i className="fa fa-minus-circle" aria-hidden="true" onClick={onRemove}></i>
-            </li>
+            {errorMessage && (
+                <li className="error-message">
+                    {errorMessage}
+                </li>
+            )}
         </ul>
     );
 }

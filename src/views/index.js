@@ -4,6 +4,7 @@ import { Provider } from "react-redux";
 import { createStore, applyMiddleware } from "redux";
 import rootReducer from "./redux/reducers";
 import thunk from "redux-thunk";
+import logger from "redux-logger";
 import Output from "./containers/Output";
 import Subscribe from "./containers/Subscribe";
 
@@ -21,7 +22,7 @@ class App extends Component {
 
 const store = createStore(
     rootReducer,
-    applyMiddleware(thunk)
+    applyMiddleware(thunk, logger)
 );
 
 const root = document.getElementById("root");

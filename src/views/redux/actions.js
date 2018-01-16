@@ -1,5 +1,10 @@
-export const SUBSCRIBE = "SUBSCRIBE";
-export const UNSUBSCRIBE = "UNSUBSCRIBE";
+export const SUBSCRIBE_REQUEST = "SUBSCRIBE_REQUEST";
+export const SUBSCRIBE_SUCCESS = "SUBSCRIBE_SUCCESS";
+export const SUBSCRIBE_FAILURE = "SUBSCRIBE_FAILURE";
+
+export const UNSUBSCRIBE_REQUEST = "UNSUBSCRIBE_REQUEST";
+export const UNSUBSCRIBE_SUCCESS = "UNSUBSCRIBE_SUCCESS";
+export const UNSUBSCRIBE_FAILURE = "UNSUBSCRIBE_FAILURE";
 
 export const GET_MESSAGES = "GET_MESSAGES";
 export const GET_SUBSCRIPTIONS = "GET_SUBSCRIPTIONS";
@@ -7,8 +12,10 @@ export const GET_SUBSCRIPTIONS = "GET_SUBSCRIPTIONS";
 export const fetchMessages = () => (dispatch) => {
     return fetch(`/sns/messages`, { method: "GET" }).then((res) => {
         if (res.status >= 200 && res.status < 300) {
-            return dispatch({
-                type: GET_MESSAGES,
+            return res.json().then((data) => {
+                return dispatch({
+                    type: GET_MESSAGES, data
+                });
             });
         }
     });
@@ -27,25 +34,37 @@ export const fetchSubscriptions = () => (dispatch) => {
 }
 
 export const subscribe = (topic) => (dispatch) => {
+    dispatch({ type: SUBSCRIBE_REQUEST });
     return fetch(`/sns/subscribe/${topic}`, { method: "POST" }).then((res) => {
-        if (res.status >= 200 && res.status < 300) {
-            return res.json().then((data) => {
-                return dispatch({
-                    type: SUBSCRIBE, data
+        return res.json().then((data) => {
+            if (res.status >= 200 && res.status < 300) {
+                dispatch({
+                    type: SUBSCRIBE_SUCCESS, data
                 });
-            });
-        }
+            } else {
+                dispatch({
+                    type: SUBSCRIBE_FAILURE, error: data
+                });
+            }
+        });
     });
 }
 
 export const unsubscribe = (subscriptionArn) => (dispatch) => {
+    dispatch({
+        type: UNSUBSCRIBE_REQUEST, subscriptionArn
+    });
     return fetch(`/sns/unsubscribe/${subscriptionArn}`, { method: "POST" }).then((res) => {
-        if (res.status >= 200 && res.status < 300) {
-            return res.json().then((data) => {
-                return dispatch({
-                    type: UNSUBSCRIBE, data
+        return res.json().then((data) => {
+            if (res.status >= 200 && res.status < 300) {
+                dispatch({
+                    type: UNSUBSCRIBE_SUCCESS, subscriptionArn, data
                 });
-            });
-        }
+            } else {
+                dispatch({
+                    type: UNSUBSCRIBE_FAILURE, subscriptionArn, error: data
+                });
+            }
+        });
     });
 }

@@ -7,6 +7,7 @@ import { subscribe, unsubscribe, fetchSubscriptions } from "../redux/actions";
 
 class Subscribe extends Component {
     static propTypes = {
+        subscription: PropTypes.object,
         subscriptions: PropTypes.array,
         fetchSubscriptions: PropTypes.func,
         subscribe: PropTypes.func,
@@ -46,10 +47,12 @@ class Subscribe extends Component {
     }
 
     render() {
-        const { subscriptions, unsubscribe } = this.props;
+        const { subscription, subscriptions, unsubscribe } = this.props;
+        const errorMessage = subscription.status === "error" && subscription.error ?
+            subscription.error.message : "";
         return (
             <div className="subscribe">
-                <Form onSubmit={this.handleSubscribe} />
+                <Form onSubmit={this.handleSubscribe} status={subscription.status} error={errorMessage} />
                 <Subscriptions data={subscriptions} onRemove={this.handleUnsubscribe} />
             </div>
         );
@@ -58,6 +61,7 @@ class Subscribe extends Component {
 
 const mapStateToProps = (state) => {
     return {
+        subscription: state.subscribe,
         subscriptions: state.subscriptions
     };
 };

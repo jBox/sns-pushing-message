@@ -34,16 +34,35 @@ a {
     display: inline-block;
 }
 
-.subscribe .item-box li.remove,
 .subscribe .item-box li.icon {
+    color: gray;
     width: 30px;
     font-size: 18px;
     line-height: 24px;
     vertical-align: bottom;
 }
 
-.subscribe .item-box li.check {
+.subscribe .item-box li.icon .check {
+    display: inline;
     color: green;
+}
+
+.subscribe .item-box li.icon .remove {
+    cursor: pointer;
+    color: gray;
+    display: none;
+}
+
+.subscribe .item-box li.icon .remove:hover {
+    color: red;
+}
+
+.subscribe .item-box:hover li.icon .remove {
+    display: inline;
+}
+
+.subscribe .item-box:hover li.icon .check {
+    display: none;
 }
 
 .subscribe .item-box li.input {
@@ -53,6 +72,7 @@ a {
 }
 
 .subscribe .item-box li.text {
+    cursor: default;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -61,6 +81,13 @@ a {
 
 .subscribe .item-box:hover li.text {
     color: green;
+    text-decoration: none;
+}
+
+.subscribe .item-box li.text.unsubscribe,
+.subscribe .item-box:hover li.text.unsubscribe {
+    color: gray;
+    text-decoration: line-through;
 }
 
 .subscribe .item-box li.input input {
@@ -91,24 +118,38 @@ a {
     outline: none;
 }
 
-.subscribe .item-box li.remove {
-    display: none;
-    text-align: center;
+.subscribe .subscriptions {
+    padding: 10px 0;
 }
 
-.subscribe .item-box:hover li.remove {
-    display: inline-block;
-}
-
-.subscribe .item-box li.remove i {
-    color: gray;
-    cursor: pointer;
-}
-
-.subscribe .item-box li.remove i:hover {
+.subscribe .error-message {
+    padding-left: 30px;
+    padding-top: 2px;
     color: red;
 }
 
-.subscribe .subscriptions {
-    padding: 10px 0;
+.subscribe .subscriptions .error-message {
+    display: block;
+    padding-left: 30px;
+    font-size: 10px;
+    margin-top: -3px;
+}
+
+.output .message {
+    padding: 5px 0;
+    color: gray;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.output .message p {
+    padding: 0;
+    margin: 0;
+}
+
+.output .message p>label span {
+    font-weight: bold;
+}
+
+.output .message p>label span::after {
+    content: ":"
 }
