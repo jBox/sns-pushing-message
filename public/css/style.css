@@ -135,6 +135,9 @@ a {
     margin-top: -3px;
 }
 
+.output {
+    padding-bottom: 50px;
+}
 .output .message {
     padding: 5px 0;
     color: gray;

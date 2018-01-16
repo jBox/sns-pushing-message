@@ -71,7 +71,7 @@ class Output extends Component {
     render() {
         const { messages } = this.props;
         const { sns } = this.state;
-        const items = messages.reverse().slice(0, 10);
+        const items = messages.reverse();
         return (
             <div className="output">
                 <div className="output-title">

@@ -12,15 +12,8 @@ const status = {
 /* POST sns listing. */
 router.post("/", function (req, res) {
   const snsMessageType = req.header("x-amz-sns-message-type");
-  if (status.sns !== "on" || !snsMessageType) {
-    if (snsMessageType === "Notification") {
-      try {
-        console.log("Trying...", JSON.parse(req.body));
-      } catch (e) {
-        console.log(e);
-      }
-    }
-
+  if (!snsMessageType) {
+    res.status(500);
     return res.send({ status: 500, message: "Not allow." });
   }
 
@@ -34,9 +27,18 @@ router.post("/", function (req, res) {
         res.send(error);
       });
     case "Notification":
-      console.log(jsonBody);
-      set(jsonBody);
-      return res.send();
+      if (status.sns === "on") {
+        set(jsonBody);
+        res.send();
+      } else {
+        try {
+          res.status(500);
+          res.send();
+          console.log("Trying...", jsonBody);
+        } catch (e) {
+          console.log(e);
+        }
+      }
   }
 });
 
