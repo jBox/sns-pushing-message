@@ -153,3 +153,22 @@ a {
 .output .message p>label span::after {
     content: ":"
 }
+
+.output .output-title {
+    margin: 14px 0;
+}
+
+.output .output-title h3 {
+    display: inline;
+}
+
+.output .output-title label {
+    padding-left: 10px;
+}
+
+.output .output-title label input {
+    padding: 0;
+    margin: 0;
+    vertical-align: bottom;
+    height: 14px;
+}

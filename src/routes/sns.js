@@ -5,10 +5,22 @@ import { set, get } from "../sns/notification";
 
 const router = express.Router();
 
+const status = {
+  sns: "on"
+};
+
 /* POST sns listing. */
 router.post("/", function (req, res) {
   const snsMessageType = req.header("x-amz-sns-message-type");
-  if (!snsMessageType) {
+  if (status.sns !== "on" || !snsMessageType) {
+    if (snsMessageType === "Notification") {
+      try {
+        console.log("Trying...", JSON.parse(req.body));
+      } catch (e) {
+        console.log(e);
+      }
+    }
+
     return res.send({ status: 500, message: "Not allow." });
   }
 
@@ -64,5 +76,18 @@ router.get("/messages", (req, res) => {
   res.send(get());
 });
 
+router.get("/status", (req, res) => {
+  res.send(status);
+});
+
+router.post("/status/:sns", (req, res) => {
+  const { sns } = req.params;
+  status.sns = "off";
+  if (sns === "on") {
+    status.sns = "on";
+  }
+
+  res.send(status);
+});
 
 module.exports = router;

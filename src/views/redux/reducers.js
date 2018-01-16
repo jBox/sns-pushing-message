@@ -7,8 +7,22 @@ import {
     UNSUBSCRIBE_SUCCESS,
     UNSUBSCRIBE_FAILURE,
     GET_SUBSCRIPTIONS,
-    GET_MESSAGES
+    GET_MESSAGES,
+    SNS,
+    SNS_OFF,
+    SNS_ON
 } from "./actions";
+
+const sns = (state = "on", action) => {
+    switch (action.type) {
+        case SNS:
+        case SNS_OFF:
+        case SNS_ON:
+            return action.data.sns;
+        default:
+            return state;
+    }
+}
 
 const subscribe = (state = {
     status: "ready",
@@ -70,6 +84,7 @@ const messages = (state = [], action) => {
 }
 
 export default combineReducers({
+    sns,
     subscribe,
     subscriptions,
     messages
