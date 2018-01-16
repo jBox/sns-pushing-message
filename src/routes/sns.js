@@ -1,6 +1,7 @@
 import express from "express";
 import { subscribe, unsubscribe, confirmSubscription } from "../sns/subscribe";
 import { getSubscriptions } from "../sns/subscriptions";
+import { set, get } from "../sns/notification";
 
 const router = express.Router();
 
@@ -20,6 +21,10 @@ router.post("/", function (req, res) {
         res.status(500);
         res.send(error);
       });
+    case "Notification":
+      console.log(jsonBody);
+      set(jsonBody);
+      return res.send();
   }
 });
 
@@ -56,7 +61,7 @@ router.get("/subscriptions", (req, res) => {
 
 /* list messages */
 router.get("/messages", (req, res) => {
-
+  res.send(get());
 });
 
 
