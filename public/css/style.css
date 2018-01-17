@@ -135,8 +135,9 @@ a {
     margin-top: -3px;
 }
 
-.output {
-    padding-bottom: 50px;
+.output .output-messages{
+    max-height: 700px;
+    overflow-y: auto;
 }
 .output .message {
     padding: 5px 0;

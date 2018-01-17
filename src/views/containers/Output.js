@@ -71,17 +71,19 @@ class Output extends Component {
     render() {
         const { messages } = this.props;
         const { sns } = this.state;
-        const items = messages.reverse();
+        const items = messages.reverse().slice(0, 100);
         return (
             <div className="output">
                 <div className="output-title">
-                    <h3>Messages</h3>
+                    <h3>Messages{messages.length > 0 ? `(${messages.length})` : ""}</h3>
                     <label><input type="checkbox" checked={sns === "on"} onChange={this.handleSnsChange} />
                         <span>SNS {sns.toUpperCase()}</span></label>
                 </div>
-                {items.map((item, index) => (
-                    <Message key={index} subject={item.Subject} message={item.Message} topic={item.TopicArn} />
-                ))}
+                <div className="output-messages">
+                    {items.map((item, index) => (
+                        <Message key={index} subject={item.Subject} message={item.Message} topic={item.TopicArn} />
+                    ))}
+                </div>
             </div>
         );
     }
