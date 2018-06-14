@@ -44,9 +44,11 @@ export default class Subscriptions extends Component {
         return (
             <div className="subscriptions">
                 <h3>Subscriptions</h3>
-                {data.map((item, index) => (
-                    <Subscription key={index} {...item} onRemove={this.handleRemove(item)} />
-                ))}
+                <div style={{maxHeight: "200px", overflow: "auto"}}>
+                    {data.map((item, index) => (
+                        <Subscription key={index} {...item} onRemove={this.handleRemove(item)} />
+                    ))}
+                </div>
             </div>
         );
     }

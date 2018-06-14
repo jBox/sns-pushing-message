@@ -7,11 +7,11 @@ import {
     UNSUBSCRIBE_SUCCESS,
     UNSUBSCRIBE_FAILURE,
     GET_SUBSCRIPTIONS,
-    GET_MESSAGES,
     SNS,
     SNS_OFF,
     SNS_ON
 } from "./actions";
+import messages from "./messages";
 
 const sns = (state = "on", action) => {
     switch (action.type) {
@@ -69,15 +69,6 @@ const subscriptions = (state = [], action) => {
 
                 return item;
             });
-        default:
-            return state;
-    }
-}
-
-const messages = (state = [], action) => {
-    switch (action.type) {
-        case GET_MESSAGES:
-            return action.data;
         default:
             return state;
     }

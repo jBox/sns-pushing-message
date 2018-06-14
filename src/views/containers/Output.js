@@ -17,7 +17,7 @@ class Output extends Component {
 
     static propTypes = {
         sns: PropTypes.string,
-        messages: PropTypes.array,
+        messages: PropTypes.object,
         fetchMessages: PropTypes.func
     }
 
@@ -71,11 +71,11 @@ class Output extends Component {
     render() {
         const { messages } = this.props;
         const { sns } = this.state;
-        const items = messages.reverse().slice(0, 100);
+        const items = messages.data;
         return (
             <div className="output">
                 <div className="output-title">
-                    <h3>Messages{messages.length > 0 ? `(${messages.length})` : ""}</h3>
+                    <h3>Messages ({messages.totalCount})</h3>
                     <label><input type="checkbox" checked={sns === "on"} onChange={this.handleSnsChange} />
                         <span>SNS {sns.toUpperCase()}</span></label>
                 </div>

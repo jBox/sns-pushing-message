@@ -75,7 +75,11 @@ router.get("/subscriptions", (req, res) => {
 
 /* list messages */
 router.get("/messages", (req, res) => {
-  res.send(get());
+  const items = get();
+  res.send({
+    totalCount: items.length,
+    data: items.reverse().slice(0, 500)
+  });
 });
 
 router.get("/status", (req, res) => {

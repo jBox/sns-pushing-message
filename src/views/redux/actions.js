@@ -47,7 +47,7 @@ export const fetchMessages = () => (dispatch) => {
         if (res.status >= 200 && res.status < 300) {
             return res.json().then((data) => {
                 return dispatch({
-                    type: GET_MESSAGES, data
+                    type: GET_MESSAGES, ...data
                 });
             });
         }
