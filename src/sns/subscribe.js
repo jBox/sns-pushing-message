@@ -6,7 +6,7 @@ import {
     AWS_SNS_HTTP_ENDPOINT
 } from "../config";
 import { addSubscription, removeSubscription } from "./subscriptions";
-
+import request from "request-promise-native";
 const SNS = () => {
     AWS.config.update({
         accessKeyId: AWS_SNS_ACCESS_KEY,
@@ -41,26 +41,20 @@ export const subscribe = (topic) => {
     });
 }
 
-export const confirmSubscription = ({ Token, TopicArn }) => {
-    const sns = SNS();
-    return new Promise((resolve, reject) => {
-        const params = { Token, TopicArn };
-        sns.confirmSubscription(params, (err, data) => {
-            if (err) {
-                console.log(err, err.stack); // an error occurred
-                reject(err);
-            } else {
-                console.log(data);           // successful response
-                addSubscription({
-                    Endpoint: AWS_SNS_HTTP_ENDPOINT,
-                    TopicArn,
-                    SubscriptionArn: data.SubscriptionArn
-                }).then((data) => {
-                    resolve(data);
-                });
-            }
-        });
-    });
+export const confirmSubscription = ({ TopicArn, SubscribeURL }) => {
+    return request.get(SubscribeURL).then((data) => {
+        const [, SubscriptionArn] = Array.from(/<SubscriptionArn>(.*?)<\/SubscriptionArn>/ig.exec(data) || []);
+        if (SubscriptionArn) {
+            // successful response
+            return addSubscription({
+                Endpoint: AWS_SNS_HTTP_ENDPOINT,
+                TopicArn,
+                SubscriptionArn
+            });
+        } else {
+            return console.log(data);
+        }
+    }).catch(error => console.error(error));
 };
 
 export const unsubscribe = (subscriptionArn) => {

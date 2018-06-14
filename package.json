@@ -26,6 +26,8 @@
     "redux": "^3.7.2",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.2.0",
+    "request": "^2.87.0",
+    "request-promise-native": "^1.0.5",
     "serve-favicon": "~2.4.2"
   },
   "devDependencies": {
