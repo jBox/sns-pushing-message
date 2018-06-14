@@ -148,6 +148,7 @@ a {
 .output .message p {
     padding: 0;
     margin: 0;
+    word-break: break-all;
 }
 
 .output .message p>label span {

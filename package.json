@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "start": "nodemon -w lib ./bin/www",
+    "startup": "node ./bin/www",
     "clear": "del-cli lib/**",
     "build": "npm run clear && babel src --out-dir lib && webpack -p",
     "dev": "npm run clear && babel src --out-dir lib --watch",

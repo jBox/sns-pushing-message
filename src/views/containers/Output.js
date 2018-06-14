@@ -27,7 +27,7 @@ class Output extends Component {
             sns: props.sns
         };
 
-        this.DELAY = 1000;
+        this.DELAY = 10000;
         this.timeout = 0;
     }
 
