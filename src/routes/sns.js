@@ -78,7 +78,7 @@ router.get("/messages", (req, res) => {
   const items = get();
   res.send({
     totalCount: items.length,
-    data: items.reverse().slice(0, 500)
+    data: items.slice(-500).reverse()
   });
 });
 
